@@ -29,14 +29,14 @@ console.log(`Intents for Discord Client: ${intents}`)
 
 // Anime reaction GIFs
 const animeReactions = {
-  happy: 'https://media.tenor.com/images/happy-anime.gif',
-  sad: 'https://media.tenor.com/images/sad-anime.gif',
-  angry: 'https://media.tenor.com/images/angry-anime.gif',
-  love: 'https://media.tenor.com/images/love-anime.gif',
-  dance: 'https://media.tenor.com/images/dance-anime.gif',
-  hug: 'https://media.tenor.com/images/hug-anime.gif',
-  pat: 'https://media.tenor.com/images/pat-anime.gif',
-  slap: 'https://media.tenor.com/images/slap-anime.gif',
+  happy: 'https://media.tenor.com/GBAmBMlRFpAAAAAC/anime-happy.gif',
+  sad: 'https://media.tenor.com/x8v1oNUOmg4AAAAC/sad-anime.gif',
+  angry: 'https://media.tenor.com/E9Q7_SBpFHAAAAAC/anime-angry.gif',
+  love: 'https://media.tenor.com/s_GRSMnrFzsAAAAC/anime-love.gif',
+  dance: 'https://media.tenor.com/NkAMnNMFBNkAAAAC/anime-dance.gif',
+  hug: 'https://media.tenor.com/od_6-HJqMFkAAAAC/anime-hug.gif',
+  pat: 'https://media.tenor.com/N0gGECMFy6EAAAAC/anime-pat.gif',
+  slap: 'https://media.tenor.com/XNIHOCaHoXkAAAAC/anime-slap.gif',
 };
 
 // Create slash commands
