@@ -1,0 +1,44 @@
+commands.js
+
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+
+const animeReactions = {
+  happy: 'https://media.tenor.com/images/happy-anime.gif',
+  sad: 'https://media.tenor.com/images/sad-anime.gif',
+  angry: 'https://media.tenor.com/images/angry-anime.gif',
+  love: 'https://media.tenor.com/images/love-anime.gif',
+  dance: 'https://media.tenor.com/images/dance-anime.gif',
+  hug: 'https://media.tenor.com/images/hug-anime.gif',
+  pat: 'https://media.tenor.com/images/pat-anime.gif',
+  slap: 'https://media.tenor.com/images/slap-anime.gif',
+};
+
+const commands = Object.keys(animeReactions).map(reaction => ({
+  data: new SlashCommandBuilder()
+    .setName(reaction)
+    .setDescription(`Send a ${reaction} anime reaction`)
+    .addUserOption(option =>
+      option.setName('target')
+        .setDescription('User to send the reaction to')
+        .setRequired(false)
+    ),
+
+  async execute(interaction) {
+    const target = interaction.options.getUser('target');
+    const user = interaction.user;
+
+    const embed = new EmbedBuilder()
+      .setColor(0x0099ff)
+      .setImage(animeReactions[reaction])
+      .setDescription(
+        target
+          ? `${user} sent ${reaction} vibes to ${target}!`
+          : `${user} is ${reaction}!`
+      )
+      .setTimestamp();
+
+    await interaction.reply({ embeds: [embed] });
+  }
+}));
+
+module.exports = commands;
