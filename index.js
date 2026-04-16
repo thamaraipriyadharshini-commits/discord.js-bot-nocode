@@ -1,5 +1,6 @@
 // Require the necessary discord.js classes
 const { Client, Events, GatewayIntentBits } = require('discord.js');
+const commands = require('./commands.js');
 const TOKEN = process.env.TOKEN;
 
 BigInt.prototype["toJSON"] = function () {
@@ -71,26 +72,15 @@ client.on(Events.GuildMemberAdd, async member => {
 client.on(Events.InteractionCreate, async interaction => {
   if (!interaction.isChatInputCommand()) return;
 
+  const command = commands.find(cmd => cmd.data.name === interaction.commandName);
+
+  if (!command) return;
+
   try {
-    const response = await fetch(process.env.INTERACTION_ENDPOINT, {
-      method: 'POST',
-      body: JSON.stringify({
-        interaction_id: interaction.id,
-        interaction_token: interaction.token,
-        interaction_data: { ...interaction.toJSON(), options: interaction.options.data }
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    console.log(await response.json())
+    await command.execute(interaction);
   } catch (error) {
     console.error(error);
-    if (interaction.replied || interaction.deferred) {
-      await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
-    } else {
-      await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-    }
+    await interaction.reply({ content: 'Error executing command!', ephemeral: true });
   }
 });
 
